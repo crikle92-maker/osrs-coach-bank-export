@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.runelite.net' }
+}
+
+def runeLiteVersion = 'latest.release'
+dependencies {
+    compileOnly "net.runelite:client:${runeLiteVersion}"
+    implementation "net.runelite:client:${runeLiteVersion}"
+    compileOnly 'org.slf4j:slf4j-api:2.0.17'
+    testImplementation 'junit:junit:4.13.2'
+}
+
+group = 'com.osrscoach'
+version = '0.1.0'
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+tasks.register('runRuneLite', JavaExec) {
+    group = 'application'
+    description = 'Launch RuneLite for plugin development'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.osrscoach.bankexport.BankExporterLauncher'
+    enableAssertions = true
+    jvmArgs '--add-opens=java.desktop/com.sun.java.swing.plaf.windows=ALL-UNNAMED'
+}
