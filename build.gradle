@@ -23,7 +23,7 @@ java {
 tasks.register('runRuneLite', JavaExec) {
     group = 'application'
     description = 'Launch RuneLite for plugin development'
-    classpath = sourceSets.main.runtimeClasspath
+  classpath = sourceSets.main.runtimeClasspath + configurations.compileClasspath
     mainClass = 'com.osrscoach.bankexport.BankExporterLauncher'
     enableAssertions = true
     jvmArgs '--add-opens=java.desktop/com.sun.java.swing.plaf.windows=ALL-UNNAMED'
